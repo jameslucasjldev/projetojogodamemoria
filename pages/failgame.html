@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Que pena...</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Impact, sans-serif;
+      color: red;
+      text-align: center;
+      margin: 0;
+
+      /* Fundo escuro com animação + fade-in */
+      background-color: black;
+      /* background-image: url('../assets/images/Tela\ Jamiro\ Jhonathan\ que\ pena....png'); */
+      background-image: url("../assets/images/Tela\ Jamiro\ Jhonathan\ que\ pena...\ V3.png");
+      background-size: cover;        /* cobre toda a tela */
+      background-position: center;   /* centraliza a imagem */
+      background-repeat: no-repeat;  /* não repete a imagem */
+      background-attachment: fixed;  /* trava o fundo na rolagem */
+      height: 100vh;                 /* altura total da tela */
+      margin: 0;
+
+      opacity: 0;
+      animation: fadeIn 0.7s ease-in forwards, triste 2s infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes triste {
+      from { background-color: black; }
+      to { background-color: #330000; }
+    }
+
+    img, h1, p, h2, .button-group {
+      opacity: 0;
+      animation: fadeIn 0.7s ease-in forwards;
+      animation-delay: 0.1s;
+    }
+
+    img {
+      max-width: 250px;
+      height: auto;
+      filter: grayscale(100%);
+    }
+
+    h1, p, h2 {
+      margin: 10px 0;
+      text-shadow:
+     -2px -2px 0 black,
+      2px -2px 0 black,
+     -2px  2px 0 black,
+      2px  2px 0 black;
+    }
+
+    h1, h2 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    h1 {
+      font-style: italic;
+    }
+
+    p {
+       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+       font-size: 30px;
+    }
+
+    button {
+      margin: 0 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      background: red;
+      color: white;
+      padding: 10px 30px;
+      font-size: 1.5rem;
+    }
+
+    .button-group {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- <img src="../assets/images/que-pena.png" alt="Que pena..." /> -->
+
+  <h1>QUE PENA... <span id="nomeUsuario"></span></h1>
+  <p>PONTOS: <span id="pontosFinais">0</span></p>
+  <p>TEMPO: <span id="tempoFinal">0</span></p>
+
+  <h2>GOSTARIA DE TENTAR DE NOVO?</h2>
+
+  <div class="button-group">
+    <button onclick="tentarDeNovo()">SIM</button>
+    <button onclick="voltarMenu()">NÃO</button>
+  </div>
+
+  <script>
+    document.getElementById("nomeUsuario").innerText = localStorage.getItem("player") || "Jogador";
+    document.getElementById("pontosFinais").innerText = localStorage.getItem("score") || "0";
+    document.getElementById("tempoFinal").innerText = localStorage.getItem("recordTimer") || "00";
+
+    function tentarDeNovo() {
+      window.location.href = "game.html";
+    }
+
+    function voltarMenu() {
+      window.location.href = "../index.html";
+    }
+
+    if (pontuacaoFinal > 0) {
+    window.location.href = "endgame.html";
+    } else {
+    window.location.href = "failgame.html";
+    }
+  </script>
+</body>
+</html>

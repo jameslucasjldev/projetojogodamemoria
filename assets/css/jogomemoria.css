@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+
+    background: url('../images/Fundo\ Menu\ Jogo\ de\ Memória\ v2.jpg');
+    background-size: cover;
+}
+
+
+img {
+    width: 18rem;
+    object-fit: cover;
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.479));
+}
+
+h1 {
+    color: #D82F1C;
+    font-size: 3rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+input {
+    width: 101%;
+    max-width: 500px;
+    font-size: 1rem;
+    padding: .5rem;
+    border: 2px solid #000000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #000000;
+    outline-color: #D82F1C;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+button {
+    width: 130%;
+    max-width: 18rem;
+    font-size: 1.2rem;
+    padding: .5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    background: #000000;
+    color: white;
+    text-shadow: 1px 1px black;
+    font-size: 1.3rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+button:disabled {
+    background: #707070;
+    cursor: auto;
+    color: #8b8b8b;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sua Jogatina</title>
+  <style>
+    
+    @keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  /* ... */
+  opacity: 0;
+  animation: fadeIn 0.7s ease-in forwards;
+}
+
+img {
+  opacity: 0;
+  animation: fadeIn 0.7s ease-in forwards;
+  animation-delay: 0.1s;
+}
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: rgb(255, 153, 0);
+      font-family: Impact, sans-serif;
+      color: yellow;
+      text-align: center;
+      margin: 0;
+      background-image: url("../assets/images/Tela\ James\ Parabéns\ V4.jpg");
+      background-size: cover;        /* cobre toda a tela */
+      background-position: center;   /* centraliza a imagem */
+      background-repeat: no-repeat;  /* não repete a imagem */
+      background-attachment: fixed;  /* trava o fundo na rolagem */
+      height: 100vh;                 /* altura total da tela */
+      margin: 0;                     /* remove margem padrão */
+    }
+
+    button {
+      margin: 0 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      background: black;
+      color: yellow;
+      padding: 10px 30px;
+      font-size: 1.5rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    h1, p, h2 {
+      margin: 10px 0;
+      text-shadow:
+     -2px -2px 0 black,
+      2px -2px 0 black,
+     -2px  2px 0 black,
+      2px  2px 0 black;
+    }
+
+    h1, h2 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    h1 {
+      font-style: italic;
+    }
+
+    p {
+       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+       font-size: 30px;
+    }
+
+    .button-group {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <h1>Sua Jogatina <span id="nomeUsuario"></span></h1> 
+  <p>PONTOS: <span id="pontosFinais">0</span></p>
+  <p>TEMPO: <span id="tempoFinal">0</span></p>
+  
+
+  <h2>GOSTARIA DE CONTINUAR?</h2>
+
+  <div class="button-group">
+    <button onclick="continuar()">SIM!</button>
+    <button onclick="voltarMenu()">NÃO</button>
+  </div>
+
+  <script>
+    // Preenche os dados da tela
+    document.getElementById("nomeUsuario").innerText = localStorage.getItem("player") || "Jogador";
+    document.getElementById("pontosFinais").innerText = localStorage.getItem("score") || "0";
+    document.getElementById("tempoFinal").innerText = localStorage.getItem("recordTimer") || "00";
+
+    // Função para reiniciar o jogo
+    function continuar() {
+      window.location.href = "game.html"; // Verifique se "game.html" está no mesmo diretório!
+    }
+
+    // Função para voltar ao menu
+    function voltarMenu() {
+      // Tente um dos caminhos abaixo dependendo da sua estrutura de pastas
+
+      // Caminho mais comum (se index.html estiver no mesmo nível de endgame.html)
+      window.location.href = "../index.html";
+
+      // Se não funcionar, tente este:
+      // window.location.href = "../index.html";
+
+      // Ou este, se estiver dois níveis acima:
+      // window.location.href = "../../index.html";
+    }
+  </script>
+</body>
+</html>
