@@ -190,7 +190,7 @@ const checkEndGame = () => {
 
     const disabledCards = document.querySelectorAll(".disabled-card");
 
-    if (disabledCards.length === 2) {
+    if (disabledCards.length === 30) {
         // Acertou todas as cartas
 
         localStorage.setItem("score", pontos);
