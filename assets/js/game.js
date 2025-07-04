@@ -203,7 +203,7 @@ const checkEndGame = () => {
            localStorage.setItem("recordPoints", pontos) 
         }
 
-        if (currentTime > storageTimer) {
+        if (currentTime < storageTimer) {
            localStorage.setItem("recordTimer2", currentTime) 
         }
 
