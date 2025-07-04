@@ -196,6 +196,17 @@ const checkEndGame = () => {
         localStorage.setItem("score", pontos);
         localStorage.setItem("recordTimer", currentTime);
 
+        const storagePoints = localStorage.getItem("score");
+        const storageTimer = localStorage.getItem("recordTimer");
+
+        if (pontos > storagePoints) {
+           localStorage.setItem("recordPoints", pontos) 
+        }
+
+        if (currentTime > storageTimer) {
+           localStorage.setItem("recordTimer2", currentTime) 
+        }
+
         clearInterval(this.loop);
 
         if (pontos < 0) {
