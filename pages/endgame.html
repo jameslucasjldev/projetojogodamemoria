@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sua Jogatina</title>
   <style>
-    
+    /* Estilos CSS existentes para animações e corpo */
     @keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
+      to {
+        opacity: 1;
+      }
+    }
 
-body {
-  /* ... */
-  opacity: 0;
-  animation: fadeIn 0.7s ease-in forwards;
-}
+    body {
+      opacity: 0;
+      animation: fadeIn 0.7s ease-in forwards;
+    }
 
-img {
-  opacity: 0;
-  animation: fadeIn 0.7s ease-in forwards;
-  animation-delay: 0.1s;
-}
-    
+    img {
+      /* Esta regra img pode não se aplicar se você não tiver imagens diretamente no corpo */
+      opacity: 0;
+      animation: fadeIn 0.7s ease-in forwards;
+      animation-delay: 0.1s;
+    }
+
+    /* Estilos de corpo existentes */
     body {
       display: flex;
       flex-direction: column;
@@ -36,14 +38,15 @@ img {
       text-align: center;
       margin: 0;
       background-image: url("../assets/images/Tela\ James\ Parabéns\ V4.jpg");
-      background-size: cover;        /* cobre toda a tela */
-      background-position: center;   /* centraliza a imagem */
-      background-repeat: no-repeat;  /* não repete a imagem */
-      background-attachment: fixed;  /* trava o fundo na rolagem */
-      height: 100vh;                 /* altura total da tela */
-      margin: 0;                     /* remove margem padrão */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      height: 100vh;
+      margin: 0;
     }
 
+    /* Estilos de botão existentes */
     button {
       margin: 0 10px;
       cursor: pointer;
@@ -56,45 +59,77 @@ img {
       font-size: 1.5rem;
     }
 
+    /* Estilos de imagem existentes */
     img {
       max-width: 100%;
       height: auto;
     }
 
-    h1, p, h2 {
+    /* Estilos de sombra de texto e fonte existentes */
+    h1,
+    p,
+    h2 {
       margin: 10px 0;
       text-shadow:
-     -2px -2px 0 black,
-      2px -2px 0 black,
-     -2px  2px 0 black,
-      2px  2px 0 black;
+        -2px -2px 0 black,
+        2px -2px 0 black,
+        -2px 2px 0 black,
+        2px 2px 0 black;
     }
 
-    h1, h2 {
+    h1,
+    h2 {
       font-family: Arial, Helvetica, sans-serif;
     }
-    
+
     h1 {
       font-style: italic;
     }
 
     p {
-       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-       font-size: 30px;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      font-size: 30px;
     }
 
     .button-group {
       margin-top: 20px;
     }
+
+    /* Novo CSS para a seção de recordes e alerta de novo recorde */
+    .record-section {
+      margin-top: 30px;
+      padding: 10px 20px;
+      border: 2px solid yellow;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Fundo preto semi-transparente */
+    }
+
+    .new-record-alert {
+      color: limegreen;
+      /* Um verde vibrante para o alerta */
+      font-weight: bold;
+      font-size: 1.8rem;
+      /* Para destacar */
+      margin-top: 15px;
+      text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+    }
   </style>
 </head>
+
 <body>
 
-  
-  <h1>Sua Jogatina <span id="nomeUsuario"></span></h1> 
+  <h1>Sua Jogatina <span id="nomeUsuario"></span></h1>
   <p>PONTOS: <span id="pontosFinais">0</span></p>
-  <p>TEMPO: <span id="tempoFinal">0</span></p>
-  
+  <p>TEMPO: <span id="tempoFinal">0</span> segundos</p>
+
+  <div id="newRecordMessage" class="new-record-alert"></div>
+
+  <div class="record-section">
+    <h2>SEUS RECORDES:</h2>
+    <p>Recorde de Pontos: <span id="recordPontos">0</span></p>
+    <p>Recorde de Tempo: <span id="recordTempo">0</span> segundos</p>
+  </div>
 
   <h2>GOSTARIA DE CONTINUAR?</h2>
 
@@ -106,27 +141,42 @@ img {
   <script>
     // Preenche os dados da tela
     document.getElementById("nomeUsuario").innerText = localStorage.getItem("player") || "Jogador";
-    document.getElementById("pontosFinais").innerText = localStorage.getItem("score") || "0";
-    document.getElementById("tempoFinal").innerText = localStorage.getItem("recordTimer") || "00";
+
+    // Pega a pontuação e o tempo do jogo atual (estes são o que você tinha como "score" e "recordTimer")
+    // Renomeei-os para "lastScore" e "lastTime" no trecho de game.js para clareza.
+    const lastScore = localStorage.getItem("lastScore") || "0";
+    const lastTime = localStorage.getItem("lastTime") || "00";
+
+    document.getElementById("pontosFinais").innerText = lastScore;
+    document.getElementById("tempoFinal").innerText = lastTime;
+
+    // Recupera e exibe os recordes reais
+    const recordPontos = localStorage.getItem("recordScore") || "0";
+    const recordTempo = localStorage.getItem("recordTime") || "00"; // Inicializa com "00" para exibição
+
+    document.getElementById("recordPontos").innerText = recordPontos;
+    document.getElementById("recordTempo").innerText = recordTempo;
+
+    // Exibe mensagens de novo recorde, se houver
+    const newRecordMessageElement = document.getElementById("newRecordMessage");
+    const messageFromGame = localStorage.getItem("newRecordMessage");
+    if (messageFromGame) {
+      newRecordMessageElement.innerHTML = messageFromGame.replace(/\n/g, '<br>'); // Substitui \n por <br> para exibição em HTML
+      localStorage.removeItem("newRecordMessage"); // Limpa a mensagem após exibi-la
+    } else {
+      newRecordMessageElement.style.display = "none"; // Oculta o elemento se não houver mensagem
+    }
 
     // Função para reiniciar o jogo
     function continuar() {
-      window.location.href = "game.html"; // Verifique se "game.html" está no mesmo diretório!
+      window.location.href = "game.html";
     }
 
     // Função para voltar ao menu
     function voltarMenu() {
-      // Tente um dos caminhos abaixo dependendo da sua estrutura de pastas
-
-      // Caminho mais comum (se index.html estiver no mesmo nível de endgame.html)
       window.location.href = "../index.html";
-
-      // Se não funcionar, tente este:
-      // window.location.href = "../index.html";
-
-      // Ou este, se estiver dois níveis acima:
-      // window.location.href = "../../index.html";
     }
   </script>
 </body>
+
 </html>
