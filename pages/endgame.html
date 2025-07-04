@@ -144,8 +144,8 @@
 
     // Pega a pontuação e o tempo do jogo atual (estes são o que você tinha como "score" e "recordTimer")
     // Renomeei-os para "lastScore" e "lastTime" no trecho de game.js para clareza.
-    const lastScore = localStorage.getItem("lastScore") || "0";
-    const lastTime = localStorage.getItem("lastTime") || "00";
+    const lastScore = localStorage.getItem("score") || "0";
+    const lastTime = localStorage.getItem("recordTimer") || "00";
 
     document.getElementById("pontosFinais").innerText = lastScore;
     document.getElementById("tempoFinal").innerText = lastTime;
