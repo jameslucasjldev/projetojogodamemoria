@@ -184,12 +184,13 @@ const checkCards = () => {
     checkEndGame();
 };
 
+
 // Checar o fim do jogo
 const checkEndGame = () => {
 
     const disabledCards = document.querySelectorAll(".disabled-card");
 
-    if (disabledCards.length === 30) {
+    if (disabledCards.length === 2) {
         // Acertou todas as cartas
 
         localStorage.setItem("score", pontos);
@@ -197,7 +198,13 @@ const checkEndGame = () => {
 
         clearInterval(this.loop);
 
-        window.location.href = "endgame.html"
+        if (pontos < 0) {
+            window.location.href = "failgame.html"
+        } else {
+            
+            window.location.href = "endgame.html";
+        }
+
 
         // setTimeout(() => {
             
